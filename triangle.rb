@@ -15,23 +15,12 @@
 #
 def triangle(a, b, c)
   
-  sred = (a + b + c) / 3.0
-  
-  # the following must be positive to be a valid triangle
-  rez = (sred - a) * (sred - b) * (sred - c)
-  
-  if a <= 0 || b <= 0 || c <= 0 || ok <= 0 then
-    raise TriangleError
-  end
-  
-  if a == b && b == c then
-    :equilateral
-  elsif a == b || a == c || b == c then
-    :isosceles
-  else
-    :scalene
-  end
+a, b , c  = sides = [a, b,c].sort
+raise TriangleError unless a >0 and a+b>c
+
+{1 => :equilateral, 2 => :isosceles, 3 => :scalene}[sides.uniq.size]
 end
-# Error class used in part 2.  No need to change this code.
+
+# Error class used in part 2. No need to change this code.
 class TriangleError < StandardError
 end
